@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.web.commons.dao.AreaMapper">
+  <resultMap id="BaseResultMap" type="com.test.web.commons.bean.Area">
+    <id column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="ORDER_LEVEL" jdbcType="DECIMAL" property="orderLevel" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="SHOW_STATUS" jdbcType="DECIMAL" property="showStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CODE, NAME, TYPE, ORDER_LEVEL, STATUS, SHOW_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from TS_SYS_AREA
+    where CODE = #{code,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TS_SYS_AREA
+    where CODE = #{code,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.test.web.commons.bean.Area">
+    insert into TS_SYS_AREA (CODE, NAME, TYPE, 
+      ORDER_LEVEL, STATUS, SHOW_STATUS
+      )
+    values (#{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
+      #{orderLevel,jdbcType=DECIMAL}, #{status,jdbcType=DECIMAL}, #{showStatus,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.test.web.commons.bean.Area">
+    insert into TS_SYS_AREA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="orderLevel != null">
+        ORDER_LEVEL,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="showStatus != null">
+        SHOW_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="orderLevel != null">
+        #{orderLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.test.web.commons.bean.Area">
+    update TS_SYS_AREA
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="orderLevel != null">
+        ORDER_LEVEL = #{orderLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="showStatus != null">
+        SHOW_STATUS = #{showStatus,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CODE = #{code,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.test.web.commons.bean.Area">
+    update TS_SYS_AREA
+    set NAME = #{name,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=DECIMAL},
+      ORDER_LEVEL = #{orderLevel,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL},
+      SHOW_STATUS = #{showStatus,jdbcType=DECIMAL}
+    where CODE = #{code,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>
